@@ -9,4 +9,20 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-PatientVitals::Application.config.secret_key_base = '2b11800182b4d7b1518c307638c06a86aa1c00d3283c4e35d0852b08e0ca142f6b4fc88597ef76f507101921c0a366487b3fbbde780bffc1547716fab4f2f88e'
+
+require 'securerandom'
+
+def secure_token
+  token_file = Rails.root.join('.secret')
+  if File.exist?(token_file)
+    # Use the existing token.
+    File.read(token_file).chomp
+  else
+    # Generate a new token and store it in token_file.
+    token = SecureRandom.hex(64)
+    File.write(token_file, token)
+    token
+  end
+end
+
+PatientVitals::Application.config.secret_key_base = secure_token
