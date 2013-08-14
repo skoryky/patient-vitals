@@ -11,6 +11,7 @@ gem 'turbolinks', '1.1.1'
 gem 'uglifier', '2.1.1'
 
 group :development, :test do
+  gem 'guard-rspec', '2.5.0'
   gem 'rspec-rails', '2.13.1'
   gem 'sqlite3', '1.3.7'
 end
