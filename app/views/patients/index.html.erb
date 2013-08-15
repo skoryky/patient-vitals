@@ -1,0 +1,27 @@
+<h1>Patients</h1>
+
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th>Bed</th>
+      <th>Patient Name</th>
+      <th>MRN</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @patients.each do |patient| %>
+      <tr onclick='location.href="<%= patient_path(patient) %>"'>
+        <td><%= patient.bed %></td>
+        <td><%= "#{patient.last_name}, #{patient.first_name}" %></td>
+        <td><%= patient.mrn %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to new_patient_path, class: 'btn' do %>
+  <i class="icon-plus"></i>
+<% end %>
