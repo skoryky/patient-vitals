@@ -20,6 +20,8 @@ require 'spec_helper'
 
 describe PatientsController do
 
+  let(:patient) { FactoryGirl.create(:patient) }
+
   # This should return the minimal set of attributes required to create a valid
   # Patient. As you add validations to Patient, be sure to
   # adjust the attributes here as well.
@@ -32,7 +34,6 @@ describe PatientsController do
 
   describe "GET index" do
     it "assigns all patients as @patients" do
-      patient = Patient.create! valid_attributes
       get :index, {}, valid_session
       assigns(:patients).should eq([patient])
     end
@@ -40,7 +41,6 @@ describe PatientsController do
 
   describe "GET show" do
     it "assigns the requested patient as @patient" do
-      patient = Patient.create! valid_attributes
       get :show, {:id => patient.to_param}, valid_session
       assigns(:patient).should eq(patient)
     end
@@ -55,7 +55,6 @@ describe PatientsController do
 
   describe "GET edit" do
     it "assigns the requested patient as @patient" do
-      patient = Patient.create! valid_attributes
       get :edit, {:id => patient.to_param}, valid_session
       assigns(:patient).should eq(patient)
     end
@@ -101,7 +100,6 @@ describe PatientsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested patient" do
-        patient = Patient.create! valid_attributes
         # Assuming there are no other patients in the database, this
         # specifies that the Patient created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -111,13 +109,11 @@ describe PatientsController do
       end
 
       it "assigns the requested patient as @patient" do
-        patient = Patient.create! valid_attributes
         put :update, {:id => patient.to_param, :patient => valid_attributes}, valid_session
         assigns(:patient).should eq(patient)
       end
 
       it "redirects to the patient" do
-        patient = Patient.create! valid_attributes
         put :update, {:id => patient.to_param, :patient => valid_attributes}, valid_session
         response.should redirect_to(patient)
       end
@@ -125,7 +121,6 @@ describe PatientsController do
 
     describe "with invalid params" do
       it "assigns the patient as @patient" do
-        patient = Patient.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Patient.any_instance.stub(:save).and_return(false)
         put :update, {:id => patient.to_param, :patient => {  }}, valid_session
@@ -133,7 +128,6 @@ describe PatientsController do
       end
 
       it "re-renders the 'edit' template" do
-        patient = Patient.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Patient.any_instance.stub(:save).and_return(false)
         put :update, {:id => patient.to_param, :patient => {  }}, valid_session
@@ -143,15 +137,17 @@ describe PatientsController do
   end
 
   describe "DELETE destroy" do
+    before do
+      patient  # Evaluate the memoized object.
+    end
+
     it "destroys the requested patient" do
-      patient = Patient.create! valid_attributes
       expect {
         delete :destroy, {:id => patient.to_param}, valid_session
       }.to change(Patient, :count).by(-1)
     end
 
     it "redirects to the patients list" do
-      patient = Patient.create! valid_attributes
       delete :destroy, {:id => patient.to_param}, valid_session
       response.should redirect_to(patients_url)
     end

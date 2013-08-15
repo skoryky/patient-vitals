@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Patient do
 
-  let(:patient) { Patient.new(bed: 'alpha', first_name: 'Linda', last_name: 'Nguyen', mrn: '6280') }
+  let(:patient) { FactoryGirl.create(:patient) }
 
   subject { patient }
 
@@ -25,8 +25,8 @@ describe Patient do
   end
 
   context 'when mrn is already taken' do
-    before { patient.dup.save }
-    it { should_not be_valid }
+    let(:duplicate_patient) { FactoryGirl.build(:patient, mrn: patient.mrn) }
+    it { expect(duplicate_patient).not_to be_valid }
   end
 
 end
