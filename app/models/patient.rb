@@ -5,6 +5,8 @@ class Patient < ActiveRecord::Base
   MAX_LAST_NAME_LENGTH = 50
   MAX_MRN_LENGTH = 50
 
+  has_many :vitals_readings
+
   validates :bed, length: {maximum: MAX_BED_LENGTH}, presence: true
   validates :first_name, length: {maximum: MAX_FIRST_NAME_LENGTH}, presence: true
   validates :last_name, length: {maximum: MAX_LAST_NAME_LENGTH}, presence: true

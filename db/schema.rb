@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130815001332) do
+ActiveRecord::Schema.define(version: 20130815153423) do
 
   create_table "patients", force: true do |t|
     t.string   "first_name"
@@ -23,5 +23,18 @@ ActiveRecord::Schema.define(version: 20130815001332) do
   end
 
   add_index "patients", ["mrn"], name: "index_patients_on_mrn", unique: true
+
+  create_table "vitals_readings", force: true do |t|
+    t.integer  "patient_id"
+    t.decimal  "bp_diastolic",        precision: 3, scale: 0
+    t.decimal  "bp_systolic",         precision: 3, scale: 0
+    t.decimal  "heart_rate",          precision: 3, scale: 0
+    t.decimal  "respiratory_rate",    precision: 2, scale: 0
+    t.decimal  "temperature_celsius", precision: 3, scale: 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "vitals_readings", ["patient_id", "created_at"], name: "index_vitals_readings_on_patient_id_and_created_at"
 
 end
