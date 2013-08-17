@@ -73,8 +73,13 @@ p {
 }
 
 #logo:hover {
-  color: #fff;
   text-decoration: none;
+}
+
+#logo-image {
+  float: left;
+  padding-top: 5px;
+  padding-right: 8px;
 }
 
 /* footer */

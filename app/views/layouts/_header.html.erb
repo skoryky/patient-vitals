@@ -1,7 +1,8 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
+<header class="navbar navbar-fixed-top">
 <div class="navbar-inner">
   <div class="container">
-    <div id="logo">Patient Vitals</div>
+    <%= image_tag('caduceus.png', size: "24x24", alt: 'Caduceus', id: 'logo-image') %>
+    <%= link_to 'Patient Vitals', patients_path, id: 'logo' %>
   </div>
 </div>
 </header>
