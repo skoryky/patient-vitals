@@ -4,6 +4,7 @@ ruby '2.0.0'
 
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'coffee-rails', '4.0.0'
+gem 'faker', '1.1.2'
 gem 'jbuilder', '1.0.2'
 gem 'jquery-rails', '2.2.1'
 gem 'rails', '4.0.0'
