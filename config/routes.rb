@@ -6,6 +6,7 @@ PatientVitals::Application.routes.draw do
     resources :vitals_readings
   end
 
+  resources :users
   resources :vitals_readings
 
   # The priority is based upon order of creation: first created -> highest priority.
