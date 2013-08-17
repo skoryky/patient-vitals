@@ -12,4 +12,8 @@ class Patient < ActiveRecord::Base
   validates :last_name, length: {maximum: MAX_LAST_NAME_LENGTH}, presence: true
   validates :mrn, length: {maximum: MAX_MRN_LENGTH}, presence: true, uniqueness: true
 
+  def name
+    "#{last_name}, #{first_name}"
+  end
+
 end
