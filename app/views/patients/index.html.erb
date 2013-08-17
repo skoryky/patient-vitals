@@ -8,21 +8,97 @@
   <thead>
     <tr>
       <th>Bed</th>
-      <th>Patient Name</th>
+      <th>Patient name</th>
       <th>MRN</th>
+      <th>&#x2103;</th>
+      <th>BP (systolic)</th>
+      <th>BP (diastolic)</th>
+      <th>HR</th>
+      <th>RR</th>
     </tr>
   </thead>
 
   <tbody>
     <% @patients.each do |patient| %>
-      <tr onclick='location.href="<%= patient_path(patient) %>"'>
+      <tr>
         <td><%= patient.bed %></td>
-        <td><%= "#{patient.last_name}, #{patient.first_name}" %></td>
+        <td><%= patient.name %></td>
         <td><%= patient.mrn %></td>
+        <td><%= patient.vitals_readings.first.try(:temperature_celsius) %></td>
+        <td><%= patient.vitals_readings.first.try(:bp_systolic) %></td>
+        <td><%= patient.vitals_readings.first.try(:bp_diastolic) %></td>
+        <td><%= patient.vitals_readings.first.try(:heart_rate) %></td>
+        <td><%= patient.vitals_readings.first.try(:respiratory_rate) %></td>
+        <td class="narrow">
+          <%= link_to '#myModal', class: 'btn add-button', 'data-patient-id' => patient.id, 'data-patient-name' => patient.name, 'data-toggle' => 'modal' do %>
+            <i class="icon-pencil"></i>
+          <% end %>
+        </td>
+        <td class="narrow">
+          <%= link_to patient_path(patient), class: 'btn' do %>
+            <i class="icon-search"></i>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
+<script>
+  $(document).ready(function() {
+    $('.add-button').click(function() {
+      var patient_id = this.getAttribute('data-patient-id');
+      var patient_name = this.getAttribute('data-patient-name');
+      $('#patient_id').val(patient_id);
+      $('#modal-title').html('Adding vitals for ' + patient_name);
+    });
+  });
+</script>
 
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for @vitals_reading do |f| %>
+          <% if @vitals_reading.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@vitals_reading.errors.count, "error") %> prohibited this vitals_reading from being saved:</h2>
+
+              <ul>
+                <% @vitals_reading.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          &#x2103;<br>
+          <%= f.text_field :temperature_celsius %><br>
+
+          BP (systolic)<br>
+          <%= f.text_field :bp_systolic %><br>
+
+          BP (diastolic)<br>
+          <%= f.text_field :bp_diastolic%><br>
+
+          Heart rate<br>
+          <%= f.text_field :heart_rate %><br>
+
+          Respiratory rate<br>
+          <%= f.text_field :respiratory_rate %><br>
+
+          <input type="hidden" id="patient_id" name="patient_id">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <%= f.submit "Add vitals reading", class: "btn btn-medium btn-primary" %>
+        <% end %>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

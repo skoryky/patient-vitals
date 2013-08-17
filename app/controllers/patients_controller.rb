@@ -5,6 +5,7 @@ class PatientsController < ApplicationController
   # GET /patients
   def index
     @patients = Patient.all
+    @vitals_reading = VitalsReading.new
   end
 
   # GET /patients/1

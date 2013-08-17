@@ -2,7 +2,11 @@ PatientVitals::Application.routes.draw do
 
   root 'patients#index'
 
-  resources :patients
+  resources :patients do
+    resources :vitals_readings
+  end
+
+  resources :vitals_readings
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
