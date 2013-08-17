@@ -1,5 +1,7 @@
 @import "bootstrap";
 
+$lightGray: #999;
+
 /* universal */
 
 html {
@@ -22,12 +24,21 @@ textarea {
   text-align: center;
 }
 
-.center h1 {
+h1 {
   margin-bottom: 10px;
 }
 
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
   background-color: #f5f5ff;
+}
+
+.narrow {
+  width: 1px;
+}
+
+.tab-content
+{
+  overflow:hidden;
 }
 
 /* typography */
@@ -40,7 +51,6 @@ h1 {
   font-size: 3em;
   letter-spacing: -2px;
   margin-bottom: 30px;
-  text-align: center;
 }
 
 h2 {
@@ -64,9 +74,9 @@ p {
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
-  color: #fff;
+  color: $lightGray;
   text-transform: uppercase;
-  letter-spacing: -1px;
+  letter-spacing: 0px;
   padding-top: 9px;
   font-weight: bold;
   line-height: 1;
