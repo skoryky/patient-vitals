@@ -11,7 +11,17 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.label :bed %>
+  <%= f.text_field :bed %>
+
+  <%= f.label :mrn %>
+  <%= f.text_field :mrn %>
+
+  <%= f.label :last_name %>
+  <%= f.text_field :last_name %>
+
+  <%= f.label :first_name %>
+  <%= f.text_field :first_name %>
+
+  <br><%= f.submit "Create patient", class: "btn btn-primary" %>
 <% end %>

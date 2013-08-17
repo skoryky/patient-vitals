@@ -1,5 +1,9 @@
 <h1>Patients</h1>
 
+<%= link_to new_patient_path, class: 'btn' do %>
+  <i class="icon-plus"></i> Add new patient
+<% end %><br><br>
+
 <table class="table table-hover table-striped">
   <thead>
     <tr>
@@ -22,6 +26,3 @@
 
 <br>
 
-<%= link_to new_patient_path, class: 'btn' do %>
-  <i class="icon-plus"></i>
-<% end %>
