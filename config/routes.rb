@@ -1,5 +1,7 @@
 PatientVitals::Application.routes.draw do
 
+  root 'patients#index'
+
   resources :patients
 
   # The priority is based upon order of creation: first created -> highest priority.
