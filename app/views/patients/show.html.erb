@@ -39,7 +39,8 @@
           series: [{
             name: '<%= type.humanize %>',
             data: <%=
-          data = @patient.vitals_readings.reverse.map do |r|
+              type = :bp_systolic if type == 'bp'
+          data = @patient.vitals_readings.select { |r| r.send(type).present? }.reverse.map do |r|
             if type == 'bp'
               [r.created_at.to_i * 1000, r.bp_systolic.to_i]
             else
@@ -49,11 +50,11 @@
           raw(data)
         %>
       },
-      <% if type == 'bp' %>
+      <% if type == :bp_systolic %>
         {
           name: 'BP (diastolic)',
           color: '#FF0000',
-          data: <%= raw(@patient.vitals_readings.reverse.map { |r| [r.created_at.to_i * 1000, r.bp_diastolic.to_i] }) %>
+          data: <%= raw(@patient.vitals_readings.select { |r| r.bp_diastolic.present? }.reverse.map { |r| [r.created_at.to_i * 1000, r.bp_diastolic.to_i] }) %>
         }
       <% end %>
       ]
