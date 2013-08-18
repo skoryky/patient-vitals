@@ -6,9 +6,12 @@ PatientVitals::Application.routes.draw do
     resources :vitals_readings
   end
 
+  resources :sessions, only: [:new, :create, :destroy]
   resources :users
   resources :vitals_readings
 
+  match '/signin', to: 'sessions#new', via: 'get'
+  match '/signout', to: 'sessions#destroy', via: 'delete'
   match '/signup', to: 'users#new', via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.
