@@ -1,6 +1,6 @@
 PatientVitals::Application.routes.draw do
 
-  root 'patients#index'
+  root 'sessions#new'
 
   resources :patients do
     resources :vitals_readings

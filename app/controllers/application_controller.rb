@@ -5,4 +5,12 @@ class ApplicationController < ActionController::Base
 
   include SessionsHelper
 
+  before_action :signed_in_user
+
+private
+
+  def signed_in_user
+    redirect_to signin_url, notice: 'Please sign in' unless signed_in?
+  end
+
 end
