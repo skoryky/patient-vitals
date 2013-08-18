@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     if @user.save
       sign_in @user
       flash[:success] = 'Welcome to Patient Vitals!'
-      redirect_to @user
+      redirect_to settings_path(id: @user)
     else
       render action: 'new'
     end
