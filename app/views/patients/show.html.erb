@@ -64,11 +64,16 @@
 </script>
 
 <ul class="nav nav-tabs" id="myTab">
-  <li><a href="#table" data-toggle="tab">Table</a></li>
   <li><a href="#charts" data-toggle="tab">Charts</a></li>
+  <li><a href="#table" data-toggle="tab">Table</a></li>
 </ul>
 
 <div class="tab-content">
+  <div class="tab-pane" id="charts">
+    <% %w[temperature_celsius heart_rate respiratory_rate bp].each do |type| %>
+      <div id="chart_div_<%= type %>" style="width: 600px; height: 300px;"></div><br>
+    <% end %>
+  </div>
   <div class="tab-pane" id="table">
     <table class="table table-hover table-striped">
       <thead>
@@ -95,11 +100,6 @@
         <% end %>
       </tbody>
     </table>
-  </div>
-  <div class="tab-pane" id="charts">
-    <% %w[temperature_celsius heart_rate respiratory_rate bp].each do |type| %>
-      <div id="chart_div_<%= type %>" style="width: 600px; height: 300px;"></div><br>
-    <% end %>
   </div>
 </div>
 
