@@ -24,7 +24,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to @user, notice: 'User was successfully created.'
+      flash[:success] = 'Welcome to Patient Vitals!'
+      redirect_to @user
     else
       render action: 'new'
     end
@@ -53,6 +54,6 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params[:user]
+      params.require(:user).permit(:email, :name, :password, :password_confirmation)
     end
 end
