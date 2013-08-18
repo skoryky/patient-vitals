@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 #ruby-gemset=ruby-2.0.0-p247_patient-vitals_rails-4.0.0
 
+gem 'bcrypt-ruby', '3.0.1'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'coffee-rails', '4.0.0'
 gem 'faker', '1.1.2'
