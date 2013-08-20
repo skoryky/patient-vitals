@@ -1,0 +1,15 @@
+<td class="transition <%= 'new' if @fade_in %>" id="temp-<%= vitals_reading.patient.id %>">
+  <%= vitals_reading.temperature_celsius || '-' %>
+</td>
+<td class="transition <%= 'new' if @fade_in %>" id="bp-systolic-<%= vitals_reading.patient.id %>">
+  <%= vitals_reading.bp_systolic || '-' %>
+</td>
+<td class="transition <%= 'new' if @fade_in %>" id="bp-diastolic-<%= vitals_reading.patient.id %>">
+  <%= vitals_reading.bp_diastolic || '-' %>
+</td>
+<td class="transition <%= 'new' if @fade_in %>" id="hr-<%= vitals_reading.patient.id %>">
+  <%= vitals_reading.heart_rate || '-' %>
+</td>
+<td class="transition <%= 'new' if @fade_in %>" id="rr-<%= vitals_reading.patient.id %>">
+  <%= vitals_reading.respiratory_rate || '-' %>
+</td>

@@ -4,7 +4,8 @@ class PatientsController < ApplicationController
 
   # GET /patients
   def index
-    @patients = Patient.all
+    @patients = Patient.where('created_at > ?', Time.at(params[:after].to_i + 1))
+    @vitals_readings = VitalsReading.where('created_at > ?', Time.at(params[:after_vitals].to_i + 1))
     @vitals_reading = VitalsReading.new
   end
 

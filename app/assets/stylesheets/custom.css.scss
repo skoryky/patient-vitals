@@ -142,3 +142,29 @@ input, textarea, select, .uneditable-input {
 input {
   height: auto !important;
 }
+
+/* transitions */
+
+tr {
+  color: black;
+  -moz-transition: color 2s;
+  -webkit-transition: color 2s;
+  -o-transition: color 2s;
+  transition: color 2s;
+}
+
+td.transition {
+  color: black;
+  -moz-transition: color 2s;
+  -webkit-transition: color 2s;
+  -o-transition: color 2s;
+  transition: color 2s;
+}
+
+tr.new {
+  color: transparent;
+}
+
+td.new {
+  color: transparent;
+}

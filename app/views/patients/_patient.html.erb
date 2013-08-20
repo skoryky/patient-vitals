@@ -1,0 +1,17 @@
+<tr class="<%= 'new' if @fade_in %>">
+  <td><div id="patient" data-time="<%= patient.created_at.to_i %>" data-time-vitals="<%= patient.vitals_readings.first.try(:created_at).to_i %>"><%= patient.bed %></div></td>
+  <td><%= patient.name %></td>
+  <td><%= patient.mrn %></td>
+  <%= patient.vitals_readings.first ? (render patient.vitals_readings.first) : raw('<td>-</td>' * 5) %>
+  <td class="narrow">
+    <%= link_to '#myModal', class: 'btn add-button', 'data-patient-id' => patient.id, 'data-patient-name' => patient.name, 'data-toggle' => 'modal' do %>
+      <i class="icon-pencil"></i>
+    <% end %>
+  </td>
+  <td class="narrow">
+    <%= link_to patient_path(patient), class: 'btn' do %>
+      <i class="icon-search"></i>
+    <% end %>
+  </td>
+</div>
+</tr>

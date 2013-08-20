@@ -4,7 +4,7 @@
   <i class="icon-plus"></i> Add new patient
 <% end %><br><br>
 
-<table class="table table-hover table-striped">
+<table id="patients-table" class="table table-hover table-striped">
   <thead>
     <tr>
       <th>Bed</th>
@@ -19,28 +19,7 @@
   </thead>
 
   <tbody>
-    <% @patients.each do |patient| %>
-      <tr>
-        <td><%= patient.bed %></td>
-        <td><%= patient.name %></td>
-        <td><%= patient.mrn %></td>
-        <td><%= patient.vitals_readings.first.try(:temperature_celsius) %></td>
-        <td><%= patient.vitals_readings.first.try(:bp_systolic) %></td>
-        <td><%= patient.vitals_readings.first.try(:bp_diastolic) %></td>
-        <td><%= patient.vitals_readings.first.try(:heart_rate) %></td>
-        <td><%= patient.vitals_readings.first.try(:respiratory_rate) %></td>
-        <td class="narrow">
-          <%= link_to '#myModal', class: 'btn add-button', 'data-patient-id' => patient.id, 'data-patient-name' => patient.name, 'data-toggle' => 'modal' do %>
-            <i class="icon-pencil"></i>
-          <% end %>
-        </td>
-        <td class="narrow">
-          <%= link_to patient_path(patient), class: 'btn' do %>
-            <i class="icon-search"></i>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
+	<%= render @patients %>
   </tbody>
 </table>
 

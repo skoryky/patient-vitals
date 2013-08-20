@@ -1,0 +1,23 @@
+// Add new patients.
+<% @fade_in = true %>
+var newElement = $("<%= raw escape_javascript(render(@patients)) %>")
+$("#patients-table tbody tr:first").before(newElement);
+newElement.focus();
+newElement.removeClass('new')
+
+// Add new vitals readings.
+<% @vitals_readings.each do |vitals_reading| %>
+  var newElementVital = $("<%= raw escape_javascript(render(vitals_reading)) %>")
+  $("#patients-table tbody td#temp-<%= vitals_reading.patient.id %>").replaceWith(newElementVital[0]);
+  $("#patients-table tbody td#bp-systolic-<%= vitals_reading.patient.id %>").replaceWith(newElementVital[2]);
+  $("#patients-table tbody td#bp-diastolic-<%= vitals_reading.patient.id %>").replaceWith(newElementVital[4]);
+  $("#patients-table tbody td#hr-<%= vitals_reading.patient.id %>").replaceWith(newElementVital[6]);
+  $("#patients-table tbody td#rr-<%= vitals_reading.patient.id %>").replaceWith(newElementVital[8]);
+  $("#patients-table tbody td#temp-<%= vitals_reading.patient.id %>").parent().find("div:last").
+    data("time-vitals", <%= vitals_reading.created_at.to_i %>)
+
+  newElementVital[0].focus();
+  for (var i = 0; i < 5; ++i) {
+    $(newElementVital[i * 2]).removeClass('new')
+  }
+<% end %>
